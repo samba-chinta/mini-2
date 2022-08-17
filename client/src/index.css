@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crete+Round&display=swap');
+
+:root {
+  --logo-font-family: 'Crete Round', serif;
+  --content-font-family: 'Poppins', sans-serif;
+  --primary-background-color: #92FFD8;
+  --primary-button-color: #00B172;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}

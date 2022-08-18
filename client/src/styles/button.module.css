@@ -14,3 +14,13 @@
   color: #000;
   border: solid 2px var(--primary-button-color);
 }
+
+.btn a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.btn:hover a {
+  text-decoration: none;
+  color: #000;
+}

@@ -10,13 +10,16 @@ const SignupForm = (props) => {
   const user_password = useRef("");
   const user_email = useRef("");
   const user_phone = useRef("");
-  // const user_dob = useRef("");
-  // const user_gender = useRef("");
+  const user_dob = useRef("");
+  const user_gender = useRef("");
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
     console.log(user_name.current.value);
     console.log(user_password.current.value);
+    console.log(user_email.current.value);
+    console.log(user_phone.current.value);
+    console.log(user_gender.current.value);
   };
 
   return (
@@ -29,8 +32,18 @@ const SignupForm = (props) => {
           placeholder="Password"
           ref={user_password}
         />
-        <InputField type="email" placeholder="Email Address" ref={user_email}/>
-        <InputField type="text" placeholder="Phone Number" ref={user_phone}/>
+        <InputField type="email" placeholder="Email Address" ref={user_email} />
+        <InputField type="text" placeholder="Phone Number" ref={user_phone} />
+        <div className={classes["dob-n-gender"]}>
+          <label>
+            Gender: 
+            <select ref={user_gender}>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </label>
+          
+        </div>
         <Button type="submit" value="SignIn" className={classes["form-btn"]} />
         <Link to="/signin">Already Have an Account? SignIn</Link>
       </form>

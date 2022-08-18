@@ -20,6 +20,7 @@ const SignupForm = (props) => {
     console.log(user_email.current.value);
     console.log(user_phone.current.value);
     console.log(user_gender.current.value);
+    console.log(user_dob.current.value);
   };
 
   return (
@@ -42,7 +43,7 @@ const SignupForm = (props) => {
               <option value="female">Female</option>
             </select>
           </label>
-          
+          <InputField type="date" ref={user_dob}/>
         </div>
         <Button type="submit" value="SignIn" className={classes["form-btn"]} />
         <Link to="/signin">Already Have an Account? SignIn</Link>

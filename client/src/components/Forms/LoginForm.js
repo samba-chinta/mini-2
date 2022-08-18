@@ -1,13 +1,25 @@
 import React, { useRef } from "react";
+import ReactDOM from "react-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import InputField from "../UI/InputField";
 import Button from "../UI/Button";
 import classes from "../../styles/form.module.css";
+import ForgetPasswordPortal from "../Portals/ForgetPasswordPortal";
+import { portalActions } from "../../store/portal-slice";
 
 const LoginForm = (props) => {
+  const dispatcher = useDispatch();
+
+  const isPortalActive = useSelector((state) => state.portal.isActive);
+
   const user_name = useRef("");
   const user_password = useRef("");
+
+  const forgetPasswordLinkClickHandler = () => {
+    dispatcher(portalActions.setActive());
+  };
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
@@ -26,8 +38,18 @@ const LoginForm = (props) => {
           ref={user_password}
         />
         <Button type="submit" value="SignIn" className={classes["form-btn"]} />
-        <Link to="/">Forget Password? Reset</Link>
+        <Button
+          type="button"
+          value="Forget Password? Reset"
+          className={classes["link-btn"]}
+          onClick={forgetPasswordLinkClickHandler}
+        />
         <Link to="/signup">Don't Have an Account? SignUp</Link>
+        {isPortalActive &&
+          ReactDOM.createPortal(
+            <ForgetPasswordPortal />,
+            document.getElementById("forget-portal")
+          )}
       </form>
     </div>
   );

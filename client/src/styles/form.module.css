@@ -32,3 +32,11 @@
 .form a:hover {
   color: #000;
 }
+
+.form .link-btn {
+  outline: none;
+  border: none;
+  background: none;
+  color: var(--primary-button-color);
+  text-align: start;
+}

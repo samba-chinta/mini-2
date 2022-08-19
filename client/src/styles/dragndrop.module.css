@@ -1,0 +1,24 @@
+.field-wrapper {
+  width: 90%;
+  height: 90vh;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+}
+
+.form {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 80% 10%;
+  gap:20px;
+}
+
+.file-field {
+  width: 100%;
+  height: 100%;
+  border: dotted 2px #929292;
+}

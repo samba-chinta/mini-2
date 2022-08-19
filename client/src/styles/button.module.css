@@ -25,3 +25,7 @@
   text-decoration: none;
   color: #000;
 }
+
+.btn:disabled {
+  cursor:no-drop;
+}

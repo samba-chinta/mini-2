@@ -1,0 +1,22 @@
+.approve-wrapper {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-family: var(--content-font-family);
+  font-size: 14px;
+}
+
+.btn {
+  outline: none;
+  border: solid 2px #00B172;
+  background-color: #00B172;
+  color: #fff;
+  padding: 5px;
+  border-radius: 2px;
+}
+
+.btn:hover {
+  border-color: indianred;
+  color: indianred;
+  background-color: #fff;
+}

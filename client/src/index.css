@@ -12,3 +12,9 @@
   margin: 0;
   padding: 0;
 }
+
+.active {
+  border: solid 1px #00B172;
+  padding: 4px;
+  color: #00B172;
+}

@@ -1,0 +1,47 @@
+.post-wrapper {
+  width: 450px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: var(--content-font-family);
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 2px 2px 1px #eee,
+            -2px -2px 1px #f1f1f1;
+}
+
+.username {
+  display: flex;
+  gap: 0 10px;
+  align-items: center;
+}
+
+.post {
+  width: 100%;
+  height: 320px;
+  border-radius: 5px;
+}
+
+.widget {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  align-self: flex-end;
+}
+
+.widget button {
+  outline: none;
+  border: none;
+  background-color: #fff;
+}
+
+.widget button:hover{
+  transform: scale(0.5);
+}
+
+@media screen and (max-width:600px){
+  .post-wrapper {
+    width: 95%;
+  }
+}

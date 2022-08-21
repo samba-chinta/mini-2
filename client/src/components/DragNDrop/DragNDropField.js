@@ -11,12 +11,23 @@ const DragNDropField = (props) => {
     console.log(file);
   };
   return (
-    <Card className={classes["field-wrapper"]}>
-      <form className={classes["form"]} onSubmit={formSubmitHandler}>
-        <input type="file" className={classes["file-field"]} ref={file} multiple={true}/>
-        <Button type="submit" value="Upload" className={classes["form-btn"]} />
-      </form>
-    </Card>
+    <div className={classes["field-wrapper"]}>
+      <div className={classes['field']}>
+        <form className={classes["form"]} onSubmit={formSubmitHandler}>
+          <input
+            type="file"
+            className={classes["file-field"]}
+            ref={file}
+            multiple={true}
+          />
+          <Button
+            type="submit"
+            value="Upload"
+            className={classes["form-btn"]}
+          />
+        </form>
+      </div>
+    </div>
   );
 };
 

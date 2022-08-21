@@ -5,10 +5,10 @@ import { useSelector } from "react-redux";
 import Welcome from "./pages/Welcome";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
-import UploadPage from "./pages/UploadPage";
 import Profile from "./pages/Profile";
 import PageNotFound from "./pages/PageNotFound";
 import Approve from "./pages/Approve";
+import Home from "./pages/Home";
 import Navigation from "./components/Navigation/Navigation";
 
 const profileDummyData = {
@@ -26,16 +26,19 @@ const App = (props) => {
     <>
       {isLoggedIn && <Navigation />}
       <Routes>
-        <Route path="/" element={<Welcome />} exact />
-        <Route path="/signin" element={<LoginPage />} exact />
-        <Route path="/signup" element={<SignupPage />} exact />
-        <Route path="/upload" element={<UploadPage />} exact />
-        <Route path="/approves" element={<Approve />} exact />
-        <Route
-          path="/profile"
-          element={<Profile {...profileDummyData} />}
-          exact
-        />
+        {!isLoggedIn && <Route path="/" element={<Welcome />} exact />}
+        {!isLoggedIn && <Route path="/signin" element={<LoginPage />} exact />}
+        {!isLoggedIn && <Route path="/signup" element={<SignupPage />} exact />}
+
+        {isLoggedIn && <Route path="/" element={<Home />} exact />}
+        {isLoggedIn && <Route path="/approves" element={<Approve />} exact />}
+        {isLoggedIn && (
+          <Route
+            path="/profile"
+            element={<Profile {...profileDummyData} />}
+            exact
+          />
+        )}
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>

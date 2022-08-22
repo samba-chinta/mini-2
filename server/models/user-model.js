@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const {Schema, Model} = mongoose
+const {Schema, model} = mongoose
 
 const specifics = {
   type: String,
@@ -13,9 +13,9 @@ const userSchema = new Schema({
   email: specifics,
   phone: Number,
   gender: String,
-  date_of_birth: Date, 
-})
+  dob: Date, 
+}, {collection: 'app_users'})
 
-const User = Model('User', userSchema)
+const User = model('User', userSchema)
 
 module.exports = User

@@ -4,6 +4,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 
 const signup = require('./routes/signup')
+const signin = require('./routes/signin')
 
 dotenv.config()
 const app = express()
@@ -31,6 +32,7 @@ app.get('/', (req, res, next) => {
 })
 
 app.use('/signup', signup)
+app.use('/signin', signin)
 
 app.listen(5000, () => {
   console.log("Listening at 5000")

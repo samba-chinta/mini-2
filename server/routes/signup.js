@@ -26,11 +26,8 @@ router.post("/", async (req, res) => {
 
   await User.create(newUser)
     .then((user) => {
-      const token = jwt.sign(password, process.env.SECRET_TOKEN);
       res.status(201).json({
         status: 201,
-        token,
-        id: user._id,
       });
     })
     .catch((err) => {

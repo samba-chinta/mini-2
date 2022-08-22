@@ -4,7 +4,7 @@ const useAuth = () => {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
 
-  const signup = async (url, options) => {
+  const auth = async (url, options) => {
     try {
       const res = await fetch(url, { ...options });
       const json = await res.json();
@@ -14,7 +14,7 @@ const useAuth = () => {
     }
   };
 
-  return { response, error, signup};
+  return { response, error, auth };
 };
 
 export default useAuth;

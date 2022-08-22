@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 import InputField from "../UI/InputField";
 import Button from "../UI/Button";
@@ -15,9 +15,6 @@ const SignupForm = (props) => {
     msg: "",
     type: "",
   });
-
-  console.log(authApi.response);
-  console.log(authApi.error);
 
   useEffect(() => {
     setTimeout(() => {
@@ -76,7 +73,7 @@ const SignupForm = (props) => {
       setStatus({ status: true, msg: "Invalid Email Address", type: "error" });
       return;
     }
-    authApi.signup("http://127.0.0.1:5000/signup", {
+    authApi.auth("http://127.0.0.1:5000/signup", {
       method: "POST",
       mode: "cors",
       headers: {
@@ -88,8 +85,8 @@ const SignupForm = (props) => {
         password,
         dob,
         phone,
-        gender
-      })
+        gender,
+      }),
     });
     setStatus({
       status: true,
@@ -136,6 +133,9 @@ const SignupForm = (props) => {
         </div>
         <Button type="submit" value="SignIn" className={classes["form-btn"]} />
         <Link to="/signin">Already Have an Account? SignIn</Link>
+        {status.status === true && status.type === "success" && (
+          <Navigate to="/signin" replace={true}/>
+        )}
       </form>
     </div>
   );

@@ -1,9 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Navigate } from "react-router-dom";
 
 import { Alert, Snackbar } from "@mui/material";
+import useAuth from "../../hooks/useAuth";
 import InputField from "../UI/InputField";
 import Button from "../UI/Button";
 import classes from "../../styles/form.module.css";
@@ -12,6 +13,7 @@ import { portalActions } from "../../store/portal-slice";
 
 const LoginForm = (props) => {
   const dispatcher = useDispatch();
+  const authApi = useAuth();
   const [status, setStatus] = useState({
     status: false,
     msg: "",
@@ -20,6 +22,8 @@ const LoginForm = (props) => {
 
   const isPortalActive = useSelector((state) => state.portal.isActive);
 
+  console.log(authApi.response);
+  
   useEffect(() => {
     setTimeout(() => {
       setStatus({
@@ -47,6 +51,16 @@ const LoginForm = (props) => {
       setStatus({ status: true, msg: "Invalid Email Address", type: "error" });
       return;
     }
+    authApi.auth("http://127.0.0.1:5000/signin", {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    })
     setStatus({
       status: true,
       msg: "Successfully Login",
@@ -82,6 +96,9 @@ const LoginForm = (props) => {
             <ForgetPasswordPortal />,
             document.getElementById("forget-portal")
           )}
+        {status.status === true && status.type === 'success' && (
+          <Navigate to="/"/>
+        )}
       </form>
     </div>
   );

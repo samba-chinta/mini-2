@@ -6,12 +6,18 @@ import Button from "../UI/Button";
 import classes from "../../styles/form.module.css";
 import { Alert, Snackbar } from "@mui/material";
 
+import useAuth from "../../hooks/useAuth";
+
 const SignupForm = (props) => {
+  const authApi = useAuth();
   const [status, setStatus] = useState({
     status: false,
     msg: "",
     type: "",
   });
+
+  console.log(authApi.response);
+  console.log(authApi.error);
 
   useEffect(() => {
     setTimeout(() => {
@@ -70,6 +76,21 @@ const SignupForm = (props) => {
       setStatus({ status: true, msg: "Invalid Email Address", type: "error" });
       return;
     }
+    authApi.signup("http://127.0.0.1:5000/signup", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: name,
+        email,
+        password,
+        dob,
+        phone,
+        gender
+      })
+    });
     setStatus({
       status: true,
       msg: "Successfully Account Created",

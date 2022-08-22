@@ -10,7 +10,7 @@
   width: 70%;
   flex-direction: column;
   height: fit-content;
-  gap: 20px;
+  gap: 10px;
   font-family: var(--content-font-family);
 }
 

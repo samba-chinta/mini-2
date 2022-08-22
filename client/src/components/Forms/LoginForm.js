@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
+import { Alert, Snackbar } from "@mui/material";
 import InputField from "../UI/InputField";
 import Button from "../UI/Button";
 import classes from "../../styles/form.module.css";
@@ -11,11 +12,28 @@ import { portalActions } from "../../store/portal-slice";
 
 const LoginForm = (props) => {
   const dispatcher = useDispatch();
+  const [status, setStatus] = useState({
+    status: false,
+    msg: "",
+    type: "",
+  });
 
   const isPortalActive = useSelector((state) => state.portal.isActive);
 
-  const user_name = useRef("");
+  useEffect(() => {
+    setTimeout(() => {
+      setStatus({
+        status: false,
+        msg: "",
+        type: "",
+      });
+    }, 6000);
+  }, [status.status]);
+
+  const user_email = useRef("");
   const user_password = useRef("");
+
+  const email_regex = new RegExp("^[\\w-\\.]+@[\\w-]+\\.+[\\w-]{2,4}$");
 
   const forgetPasswordLinkClickHandler = () => {
     dispatcher(portalActions.setActive());
@@ -23,15 +41,29 @@ const LoginForm = (props) => {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    console.log(user_name.current.value);
-    console.log(user_password.current.value);
+    const email = user_email.current.value;
+    const password = user_password.current.value;
+    if (!email_regex.test(email)) {
+      setStatus({ status: true, msg: "Invalid Email Address", type: "error" });
+      return;
+    }
+    setStatus({
+      status: true,
+      msg: "Successfully Login",
+      type: "success",
+    });
   };
 
   return (
     <div className={classes["form-wrapper"]}>
       <form onSubmit={formSubmitHandler} className={classes["form"]}>
+        {status.status && (
+          <Snackbar open={status.status} autoHideDuration={6000}>
+            <Alert severity={status.type}>{status.msg}</Alert>
+          </Snackbar>
+        )}
         <h2>Sign In</h2>
-        <InputField type="text" placeholder="UserName" ref={user_name} />
+        <InputField type="email" placeholder="Email Address" ref={user_email} />
         <InputField
           type="password"
           placeholder="Password"

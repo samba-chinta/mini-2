@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/user-model");
+const Notification = require("../models/notification-model");
 
 const router = express.Router();
 
@@ -23,6 +24,13 @@ router.post("/", async (req, res) => {
     dob: new Date(dob),
     gender,
   };
+
+  await Notification.create({
+    email,
+    notifications: [],
+  })
+  .then(res => console.log("Notification Center Created"))
+  .catch(err => console.log("Error"))
 
   await User.create(newUser)
     .then((user) => {

@@ -52,13 +52,13 @@ const Home = (props) => {
       )}
       <div className={classes["posts"]}>
         <h2>Posts:</h2>
-        {userPosts.length !== 0 && 
-          userPosts.map((post) => {return <Posts
+        {userPosts.length !== 0 ?
+          (userPosts.map((post) => {return <Posts
             key={Math.random().toString()}
             email={post.email}
             likes={post.likes}
             src={`data:image/jpeg;charset=utf-8;base64, ${btoa([].reduce.call(new Uint8Array(post.img.data.data),function(p,c){return p+String.fromCharCode(c)},''))}`}
-          />})
+          />})): (<p>No Posts Available</p>)
         }
       </div>
       <Button

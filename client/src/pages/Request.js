@@ -1,26 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import RequestItem from "../components/UI/RequestItem";
 import classes from "../styles/approve.module.css";
 
-const dummyData = [
-  {
-    id: '1',
-    requestedUser: "mohit",
-  },
-  {
-    id: '2',
-    requestedUser: "samba",
-  },
-];
-
 const Request = (props) => {
-  const [requests, setRequests] = useState(dummyData);
+  const [requests, setRequests] = useState([]);
 
-  const removeAnApproveHandler = (id) => {
-    const remApprovals = requests.filter(value => value.id !== id);
-    setRequests(remApprovals);
-  };
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/notifications", {
+        params: { email: localStorage.getItem("data") },
+      })
+      .then((res) => setRequests(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div className={classes["wrapper"]}>
@@ -28,13 +22,11 @@ const Request = (props) => {
       {requests.length === 0 ? (
         <p>No Requests to Show</p>
       ) : (
-        requests.map((approve) => (
-          <RequestItem
-            key={Math.random().toString()}
-            {...approve}
-            removeItemFunc={removeAnApproveHandler}
-          />
-        ))
+        [...requests]
+          .reverse()
+          .map((approve) => (
+            <RequestItem key={Math.random().toString()} msg={approve} />
+          ))
       )}
     </div>
   );

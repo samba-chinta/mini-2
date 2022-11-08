@@ -23,8 +23,7 @@ def demo():
         image_path = path + _
         encoding = fr.face_encodings(image)[0]
         known_name_encodings.append(encoding)
-        known_names.append(os.path.splitext(os.path.basename(image_path))[0].capitalize() + "@gvpce.ac.in")
-    print(known_names)
+        known_names.append(os.path.splitext(os.path.basename(image_path))[0].upper() + "@gvpce.ac.in")
 
     test_image = "../server/uploads/{}".format(postedImg)
     image = cv2.imread(test_image)

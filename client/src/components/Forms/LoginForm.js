@@ -4,16 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 
 import { Alert, Snackbar } from "@mui/material";
-import useAuth from "../../hooks/useAuth";
 import InputField from "../UI/InputField";
 import Button from "../UI/Button";
 import classes from "../../styles/form.module.css";
 import ForgetPasswordPortal from "../Portals/ForgetPasswordPortal";
 import { portalActions } from "../../store/portal-slice";
+import { userActions } from "../../store/user-slice";
 
 const LoginForm = (props) => {
   const dispatcher = useDispatch();
-  const authApi = useAuth();
   const [status, setStatus] = useState({
     status: false,
     msg: "",
@@ -21,8 +20,6 @@ const LoginForm = (props) => {
   });
 
   const isPortalActive = useSelector((state) => state.portal.isActive);
-
-  console.log(authApi.response);
   
   useEffect(() => {
     setTimeout(() => {
@@ -37,35 +34,42 @@ const LoginForm = (props) => {
   const user_email = useRef("");
   const user_password = useRef("");
 
-  const email_regex = new RegExp("^[\\w-\\.]+@[\\w-]+\\.+[\\w-]{2,4}$");
+  // const email_regex = new RegExp("^[\\w-\\.]+@[\\w-]+\\.+[\\w-]{2,4}$");
 
   const forgetPasswordLinkClickHandler = () => {
     dispatcher(portalActions.setActive());
   };
 
-  const formSubmitHandler = (e) => {
+  const formSubmitHandler = async (e) => {
     e.preventDefault();
     const email = user_email.current.value;
     const password = user_password.current.value;
-    if (!email_regex.test(email)) {
-      setStatus({ status: true, msg: "Invalid Email Address", type: "error" });
-      return;
+    // if (!email_regex.test(email)) {
+    //   setStatus({ status: true, msg: "Invalid Email Address", type: "error" });
+    //   return;
+    // }
+    try {
+      const res = await fetch("http://127.0.0.1:8000/signin", {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",    
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+      const json = await res.json();
+      localStorage.setItem("data", json.email);
+      localStorage.setItem("loggedin", true);
+      dispatcher(userActions.login(json));
+    } catch (error) {
+      setStatus({
+        status: false,
+        msg: "Login Failed",
+        type: "failure",
+      });
     }
-    authApi.auth("http://127.0.0.1:5000/signin", {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    })
-    setStatus({
-      status: true,
-      msg: "Successfully Login",
-      type: "success",
-    });
   };
 
   return (

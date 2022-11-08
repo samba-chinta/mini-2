@@ -9,6 +9,7 @@ const useAuth = () => {
       const res = await fetch(url, { ...options });
       const json = await res.json();
       setResponse(json);
+      console.log(response);
     } catch (error) {
       setError(error);
     }

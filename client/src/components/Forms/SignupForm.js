@@ -34,7 +34,7 @@ const SignupForm = (props) => {
   const user_dob = useRef("");
   const user_gender = useRef("");
 
-  const email_regex = new RegExp("^[\\w-\\.]+@[\\w-]+\\.+[\\w-]{2,4}$");
+  // const email_regex = new RegExp("^[\\w-\\.]+@[\\w-]+\\.+[\\w-]{2,4}$");
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
@@ -69,11 +69,11 @@ const SignupForm = (props) => {
       });
       return;
     }
-    if (!email_regex.test(email)) {
-      setStatus({ status: true, msg: "Invalid Email Address", type: "error" });
-      return;
-    }
-    authApi.auth("http://127.0.0.1:5000/signup", {
+    // if (!email_regex.test(email)) {
+    //   setStatus({ status: true, msg: "Invalid Email Address", type: "error" });
+    //   return;
+    // }
+    authApi.auth("http://127.0.0.1:8000/signup", {
       method: "POST",
       mode: "cors",
       headers: {

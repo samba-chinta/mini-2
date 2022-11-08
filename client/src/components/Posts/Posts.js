@@ -8,15 +8,15 @@ const Posts = (props) => {
   return (
     <div className={classes['post-wrapper']}>
       <div className={classes['username']}>
-        <Avatar sx={{ bgcolor: "#00B172" }}>{props.username[0]}</Avatar>
-        <p>{props.username}</p>
+        <Avatar sx={{ bgcolor: "#00B172" }}>{props.email[0]}</Avatar>
+        <p>{props.email}</p>
       </div>
       <img src={props.src} alt="Post" className={classes['post']}/>
       <div className={classes['widget']}>
         <button>
           <FavoriteBorderIcon/>
         </button>
-        <span>{props.likesCount}</span>
+        <span>{props.likes}</span>
       </div>
     </div>
   )

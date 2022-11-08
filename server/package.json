@@ -11,6 +11,7 @@
   "author": "samba chinta",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.1.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "brcypt": "^1.0.1",
@@ -20,6 +21,7 @@
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.2",
+    "multer": "^1.4.5-lts.1",
     "nodemon": "^2.0.19"
   }
 }

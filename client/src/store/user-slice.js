@@ -9,10 +9,10 @@ const userSlice = createSlice({
   },
   reducers: {
     login: (state, payload) => {
-      console.log(payload)
       state.isLoggedIn = true;
       state.token = payload.token;
       state.id = payload.id;
+      window.location.replace("http://localhost:3000/");
     },
     logout: (state) => {
       state.isLoggedIn = false;

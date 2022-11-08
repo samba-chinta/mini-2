@@ -32,19 +32,13 @@ const Navigation = (props) => {
             <NavLink to="/">Home</NavLink>
           </li>
           <li className={classes["nav-item"]}>
-            <NavLink to="/friends">Friends</NavLink>
-          </li>
-          <li className={classes["nav-item"]}>
             <NavLink to="/requests">Requests</NavLink>
           </li>
           <li className={classes["nav-item"]}>
-            <NavLink to="/approves">Approves</NavLink>
-          </li>
-          <li className={classes["nav-item"]}>
-            <NavLink to="/profile">Profile</NavLink>
-          </li>
-          <li className={classes["nav-item"]}>
-            <NavLink to="/logout">Logout</NavLink>
+            <button onClick={() => {
+              localStorage.removeItem("loggedin");
+              window.location.replace("http://localhost:3000/");
+            }}>Logout</button>
           </li>
         </ul>
       </nav>

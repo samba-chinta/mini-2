@@ -8,7 +8,6 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
-  console.log(email)
   User.findOne({ email })
     .then((user) => {
       if (!bcrypt.compareSync(password, user.password)) {
@@ -21,6 +20,7 @@ router.post("/", async (req, res) => {
         res.status(202).json({
           id: user._id,
           token,
+          email,
           message: "User found",
         });
       }
